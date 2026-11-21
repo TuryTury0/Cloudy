@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Cloudy",
+  "version": "0.2.0",
+  "identifier": "com.anytask.next",
+  "build": {
+    "beforeDevCommand": "npm run dev -w @anytask/desktop",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build -w @anytask/desktop",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "island",
+        "title": "Cloudy",
+        "url": "index.html?view=island",
+        "width": 900,
+        "height": 600,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "resizable": false,
+        "focus": false,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEU2MUUwN0IzMjE2OENCN0YKUldSL3kyZ2hzd2NlNWpFWk9JeVVHbUFKMkE0dzUvNDUxd0N6V3F5aVpoWTZtaS8vNEtJbmZmL0sK",
+      "endpoints": [
+        "https://github.com/TuryTury0/AnyTask/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

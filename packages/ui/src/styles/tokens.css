@@ -1,0 +1,165 @@
+/* AnyTask design system: colours, glass, type, motion. The theme (theme.ts) overrides the accent variables. */
+
+:root {
+  color-scheme: dark;
+
+  /* accents (set by the theme) */
+  --accent: #ffffff;
+  --accent-2: #94a3b8;
+  --accent-3: #1e293b;
+  --accent-text: #ffffff;
+  --glow: rgba(255, 255, 255, 0.45);
+  --glow-soft: rgba(255, 255, 255, 0.18);
+
+  /* text */
+  --text: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-dim: #8b97ab;
+  --success: #34d399;
+  --danger: #f87171;
+  --warning: #fbbf24;
+
+  /* glass */
+  --glass-top: rgba(34, 40, 58, 0.86);
+  --glass-bottom: rgba(8, 10, 16, 0.92);
+  --glass-rim: rgba(255, 255, 255, 0.55);
+  --glass-rim-dim: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85), 0 2px 10px rgba(0, 0, 0, 0.45);
+  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(0, 0, 0, 0.6);
+  /* Liquid glass surfaces (cards, chips). --shine is one soft light that follows the pointer across the whole
+     window (trackShine in theme.ts sets --mx/--my); it is fixed to the window, so every glass surface it passes
+     lights up in the right place. */
+  --shine: radial-gradient(340px circle at var(--mx, -600px) var(--my, -600px), rgba(255, 255, 255, 0.085), transparent 62%) fixed;
+  --surface: var(--shine), linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.03));
+  --surface-hover: var(--shine), linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.06));
+  --border: rgba(255, 255, 255, 0.1);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 10px 30px -18px rgba(0, 0, 0, 0.7);
+  --glass-blur: blur(22px) saturate(165%);
+
+  /* type */
+  --font: 'Vazirmatn Variable', 'Plus Jakarta Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-latin: 'Plus Jakarta Sans Variable', 'Vazirmatn Variable', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --fast: 160ms;
+  --medium: 280ms;
+  --slow: 520ms;
+
+  /* shape */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* English reads in the Latin face; Persian words inside it still fall back to Vazirmatn. */
+:root[lang='en'] {
+  --font: var(--font-latin);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  font-family: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* "Reduce motion" (Settings > Appearance) stops animations completely. It is a choice in the app on purpose:
+   following the Windows "Animation effects" switch made every endless animation (blinking eyes, spinners,
+   shimmer) restart every millisecond, which looked like random flicker. */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ---------- Liquid glass ---------- */
+
+/* An app window (chat, settings). The OS blurs the desktop behind it (see open_settings in actions.rs); this adds
+   a dark tint, two soft lights in the theme colours and a bright rim, so the window reads as a pane of glass. */
+.app-window {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(85% 60% at 90% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(75% 55% at -8% 108%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, rgba(24, 27, 44, 0.66), rgba(8, 9, 15, 0.8));
+}
+.app-window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+/* The theme colours drifting behind the glass (an Aurora canvas); cards blur them. */
+.app-window > .backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.4;
+  -webkit-mask: radial-gradient(120% 90% at 70% 0%, #000 10%, transparent 75%);
+  mask: radial-gradient(120% 90% at 70% 0%, #000 10%, transparent 75%);
+  transition: opacity var(--slow);
+  pointer-events: none;
+}
+
+/* Every card is a pane of glass: the components set its tint (--surface) and padding, this adds the depth. */
+.card {
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--glass-blur);
+  transition: box-shadow var(--medium) var(--ease-out);
+}
+.card:hover {
+  box-shadow: var(--card-shadow), 0 0 0 1px rgba(255, 255, 255, 0.05), 0 18px 40px -22px var(--glow);
+}
+
+@keyframes glass-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    filter: blur(6px);
+  }
+}

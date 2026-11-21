@@ -1,0 +1,14 @@
+[package]
+name = "tauri-plugin-anytask-phone"
+description = "AnyTask phone access for the paired PC: notifications, SMS, battery, opening apps (Android)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+links = "tauri-plugin-anytask-phone"
+
+[dependencies]
+tauri = { version = "2", default-features = false }
+serde_json.workspace = true
+
+[build-dependencies]
+tauri-plugin = { version = "2.7", features = ["build"] }

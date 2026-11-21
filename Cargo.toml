@@ -1,0 +1,57 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/desktop/src-tauri", "apps/mobile/src-tauri"]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2024"
+license = "MIT"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+
+# Debug builds keep line numbers for backtraces but skip full debug info, which made linking slow.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
+
+# Screenshots are encoded to JPEG on every desktop step; unoptimized it is several times slower.
+[profile.dev.package.image]
+opt-level = 3
+
+# The wake word listens all the time (about 9 million multiply-adds per second of audio); it must keep up in
+# debug builds too.
+[profile.dev.package.anytask-wake]
+opt-level = 3
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+
+# The ready-to-run test app (npm run app, then npm run app:open): starts in seconds, needs no dev server, and lives
+# in its own folder (target/app) so it can be rebuilt while `npm run dev` runs.
+[profile.app]
+inherits = "dev"
+
+[profile.app.package."*"]
+debug = false
+
+# Without debug assertions main.rs builds a windowed program: no black console window next to the island on start.
+[profile.app.package.anytask-desktop]
+debug-assertions = false
+# No debug info for the app's own crate: the test app then links without a large PDB, which took more than ten
+# minutes on this PC when memory was short (11-06 02:00).
+debug = false
+
+[profile.app.package.image]
+opt-level = 3
+
+[profile.app.package.anytask-wake]
+opt-level = 3

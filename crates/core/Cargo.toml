@@ -1,0 +1,25 @@
+[package]
+name = "anytask-core"
+description = "AnyTask agent runtime: states, events, tools, jobs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anytask-llm = { path = "../llm" }
+anytask-storage = { path = "../storage" }
+anytask-web = { path = "../web" }
+async-trait = "0.1.92"
+base64 = "0.22"
+chrono = { version = "0.4.45", default-features = false, features = ["clock", "std"] }
+dirs = "7.0.0"
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tokio-util = "0.7.20"
+
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full", "test-util"] }
+reqwest = { version = "0.13.5", features = ["json", "socks"] }

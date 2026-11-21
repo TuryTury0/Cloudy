@@ -1,0 +1,25 @@
+# Rust build output
+target/
+
+# JS
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Tauri & Android generated caches / binaries
+apps/*/src-tauri/gen/schemas/
+.gradle/
+.kotlin/
+**/jniLibs/
+
+# Local runtime data, analysis, logs and temp files
+graphify-out/
+*.log
+*.sqlite3
+*.broken.*
+.env
+allcode.txt
+cloudy-preview.html
+
+# Release builds (the folder keeps only its READMEs in git)
+release/v*/

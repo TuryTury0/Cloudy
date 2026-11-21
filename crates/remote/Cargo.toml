@@ -1,0 +1,23 @@
+[package]
+name = "anytask-remote"
+description = "AnyTask remote channel: the phone talks to the PC over an encrypted, paired connection"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+base64 = "0.22"
+async-trait = "0.1.92"
+futures-util = "0.3"
+serde.workspace = true
+serde_json.workspace = true
+snow = "0.10.0"
+tokio = { workspace = true, features = ["full"] }
+tokio-tungstenite = "0.27"
+
+# Listing the phone's networks (a hotspot's own network included) for the discovery broadcast.
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+base64 = "0.22"

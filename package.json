@@ -1,0 +1,17 @@
+{
+  "name": "anytask-next",
+  "private": true,
+  "description": "AnyTask Next: voice and desktop assistant (Tauri + Rust + Svelte)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run tauri -w @anytask/desktop -- dev",
+    "build": "npm run tauri -w @anytask/desktop -- build",
+    "test": "npm run test --workspaces --if-present && cargo test --workspace",
+    "check": "npm run check --workspaces --if-present && cargo clippy --workspace -- -D warnings",
+    "app": "npm run build -w @anytask/desktop && cargo build -p anytask-desktop --profile app --features tauri/custom-protocol",
+    "app:open": "start \"\" target\\app\\anytask-desktop.exe"
+  }
+}

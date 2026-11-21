@@ -1,0 +1,9 @@
+[package]
+name = "anytask-audio"
+description = "AnyTask audio: microphone and speaker streams, resampling, levels"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+cpal = "0.16"

@@ -1,0 +1,13 @@
+[package]
+name = "anytask-storage"
+description = "AnyTask storage: memory (SQLite) and secrets (OS keychain)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+keyring = "4.2.0"
+rusqlite = { version = "0.41.1", features = ["bundled"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true

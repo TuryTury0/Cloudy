@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="sky-bg" x1="48" y1="32" x2="464" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f2544" />
+      <stop offset="55%" stop-color="#0b182e" />
+      <stop offset="100%" stop-color="#060c18" />
+    </linearGradient>
+    <radialGradient id="sky-glow" cx="50%" cy="44%" r="44%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.42" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cloud-back" x1="180" y1="120" x2="410" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.28" />
+    </linearGradient>
+    <linearGradient id="cloud-front" x1="140" y1="130" x2="360" y2="375" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="58%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#7dd3fc" />
+    </linearGradient>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="116" fill="url(#sky-bg)" stroke="rgba(186, 230, 253, 0.25)" stroke-width="6" />
+  <circle cx="256" cy="236" r="200" fill="url(#sky-glow)" />
+
+  <!-- Back soft sky-blue cloud layer -->
+  <path
+    d="M196 332H386C422 332 450 304 450 269C450 235 424 208 391 205C377 156 333 122 280 122C231 122 189 152 174 196C140 202 115 231 115 266C115 303 149 332 196 332Z"
+    fill="url(#cloud-back)"
+  />
+
+  <!-- Main crisp white & sky-blue cloud -->
+  <path
+    d="M142 372H374C418 372 452 338 452 295C452 254 420 220 379 217C364 156 310 112 245 112C179 112 125 157 111 218C74 225 48 257 48 295C48 338 86 372 142 372Z"
+    fill="url(#cloud-front)"
+  />
+
+  <!-- Subtle glossy top highlight -->
+  <path
+    d="M138 220C153 166 196 134 246 134C273 134 297 143 316 159"
+    stroke="#ffffff"
+    stroke-width="11"
+    stroke-linecap="round"
+    opacity="0.82"
+  />
+</svg>

@@ -1,0 +1,39 @@
+[package]
+name = "anytask-desktop"
+description = "AnyTask desktop app (island overlay, tray, hotkeys, settings)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "anytask_desktop_lib"
+# Only the Rust library: the desktop app never needs a static or dynamic library (those are for phones), and
+# building them made every run link the whole app three times.
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-single-instance = "2"
+tauri-plugin-updater = "2"
+serde.workspace = true
+serde_json.workspace = true
+anytask-core = { path = "../../../crates/core" }
+anytask-control = { path = "../../../crates/control" }
+anytask-llm = { path = "../../../crates/llm" }
+anytask-storage = { path = "../../../crates/storage" }
+anytask-web = { path = "../../../crates/web" }
+anytask-audio = { path = "../../../crates/audio" }
+anytask-mcp = { path = "../../../crates/mcp" }
+anytask-wake = { path = "../../../crates/wake" }
+anytask-remote = { path = "../../../crates/remote" }
+anytask-migrate = { path = "../../../crates/migrate" }
+qrcode = { version = "0.14.1", default-features = false, features = ["svg"] }
+base64 = "0.22"
+tokio-util = "0.7.20"
+async-trait = "0.1.92"
+chrono = { version = "0.4.45", default-features = false, features = ["clock", "std"] }
+tokio = { workspace = true, features = ["sync", "time"] }

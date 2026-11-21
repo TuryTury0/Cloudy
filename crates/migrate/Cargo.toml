@@ -1,0 +1,15 @@
+[package]
+name = "anytask-migrate"
+description = "AnyTask: bring settings, keys, memory, MCP servers and the wake word over from v1"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+aes-gcm = "0.10.3"
+base64 = "0.22"
+serde.workspace = true
+serde_json.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = ["Win32_Foundation", "Win32_Security_Cryptography"] }
